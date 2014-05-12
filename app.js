@@ -32,7 +32,7 @@ App.use(morgan({ format: 'dev', immediate: true }));
 App.use(require('body-parser')());
 App.use(require('method-override')());
 App.use(require('cookie-parser')('secret'));
-App.use(require('express-session')({ key: 'booblue.session', 
+App.use(require('express-session')({ key: 'Express Skeleton', 
                                      cookie: { maxAge: APP.session_expire } }));
 App.use(flash());
 
