@@ -1,0 +1,28 @@
+{
+  "name": "booblue",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "browserify": "*",
+    "body-parser": "~1.0.2",
+    "clusterfoo.express-helpers": "git://github.com/clusterfoo/express-helpers",
+    "colors": "*",
+    "connect-flash": "~0.1.1",
+    "cookie-parser": "~1.0.1",
+    "ejs": "~0.8.4",
+    "errorhandler": "~1.0.1",
+    "express": "~4.0.0",
+    "express-session": "~1.0.4",
+    "method-override": "~1.0.0",
+    "mocha": "*",
+    "mongoose": "~3.8.1",
+    "morgan": "~1.0.0",
+    "nock": "~0.27.3",
+    "node-sass": "*",
+    "serve-favicon": "~2.0.0",
+    "supertest": "*"
+  }
+}
