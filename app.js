@@ -1,7 +1,5 @@
-var Express = require('express');
 // logger
 var morgan = require('morgan');
-var HTTP = require('http');
 var Path = require('path');
 var Sass = require('node-sass');
 var Cf = require('clusterfoo.express-helpers');
@@ -9,6 +7,7 @@ var flash = require('connect-flash');
 
 // Set Up Application
 
+var Express = require('express');
 var App = Express();
 var APP = require('./config');
 module.exports = App;
@@ -49,6 +48,6 @@ if ('development' == env) App.use(require('errorhandler')());
 // Routes
 
 // Serve
-HTTP.createServer(App).listen(App.get('port'), function() {
+App.listen(App.get('port'), function() {
   console.log('Express server listening on port ' + App.get('port'));
 });
