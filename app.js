@@ -1,53 +1,30 @@
-// logger
-var morgan = require('morgan');
-var Path = require('path');
-var Sass = require('node-sass');
-var Cf = require('clusterfoo.express-helpers');
-var flash = require('connect-flash');
+// DON'T DO THIS
+global._ = require('./public/javascripts/funcderscore.js');
+global.APP = require('./config');
 
-// Set Up Application
+var path = require('path');
 
-var Express = require('express');
-var App = Express();
-var APP = require('./config');
-module.exports = App;
+APP.root = __dirname;
+APP.fromRoot = function (target) {
+  return path.join(APP.root, target);
+}
 
-////
-// All environments
-App.set('port', process.env.PORT || 3000);
-App.set('views', Path.join(__dirname, 'views'));
-App.set('view engine', 'ejs');
-App.set('NOADHOST', APP.host);
-App.use(Sass.middleware({
-    src: __dirname
-  , dest: Path.join(__dirname, 'public')
-  , debug: true
-}));
-//App.use(require('serve-favicon')());
-App.use(Cf.pass);
-// Pass config hash so that it can be used from within views
-App.use(function(req, res, next) { App.locals.APP = APP; next(); });
-App.use(morgan({ format: 'dev', immediate: true }));
-App.use(require('body-parser')());
-App.use(require('method-override')());
-App.use(require('cookie-parser')('secret'));
-App.use(require('express-session')({ key: 'Express Skeleton', 
-                                     cookie: { maxAge: APP.session_expire } }));
-App.use(flash());
+var cf = require('clusterfoo.express-helpers');
+var http = require('http');
+var express = require('express');
 
-// routes
-require("./routes")(App);
+var App = express();
 
-App.use(Cf.error);
-App.use(Express.static(Path.join(__dirname, 'public')));
+require("./init/set_app.js")(App);
+require("./init/routes")(App);
+App.use(cf.error);
 
-// Development only
 var env = process.env.NODE_ENV || 'development';
 if ('development' == env) App.use(require('errorhandler')());
 
-// Routes
-
-// Serve
-App.listen(App.get('port'), function() {
+// Set up http and websocket servers
+var server = http.createServer(App).listen(App.get('port'), function() {
   console.log('Express server listening on port ' + App.get('port'));
 });
+
+module.exports = App;
