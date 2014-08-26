@@ -1,9 +1,8 @@
-// DON'T DO THIS
-global._ = require('./public/javascripts/funcderscore.js');
-global.APP = require('./config');
+global.APP = require('./config/config');
 
 var path = require('path');
 
+// easy access to directories
 APP.root = __dirname;
 APP.fromRoot = function (target) {
   return path.join(APP.root, target);
@@ -13,18 +12,22 @@ var cf = require('clusterfoo.express-helpers');
 var http = require('http');
 var express = require('express');
 
-var App = express();
+var app = express();
 
-require("./init/set_app.js")(App);
-require("./init/routes")(App);
-App.use(cf.error);
+require("./init/set_app.js")(app);
+require("./init/routes")(app);
+app.use(cf.error);
 
 var env = process.env.NODE_ENV || 'development';
-if ('development' == env) App.use(require('errorhandler')());
+if ('development' == env) app.use(require('errorhandler')());
 
 // Set up http and websocket servers
-var server = http.createServer(App).listen(App.get('port'), function() {
-  console.log('Express server listening on port ' + App.get('port'));
+var server = http.createServer(app).listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + app.get('port'));
 });
 
-module.exports = App;
+var io = require('socket.io').listen(server);
+
+require('./init/sockets')(io);
+
+module.exports = app;

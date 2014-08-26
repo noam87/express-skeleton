@@ -1,5 +1,5 @@
 {
-  "name": "booblue",
+  "name": "express-skeleton",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -7,22 +7,22 @@
   },
   "dependencies": {
     "browserify": "*",
-    "body-parser": "~1.0.2",
+    "body-parser": "1.x",
     "clusterfoo.express-helpers": "git://github.com/clusterfoo/express-helpers",
     "colors": "*",
-    "connect-flash": "~0.1.1",
-    "cookie-parser": "~1.0.1",
-    "ejs": "~0.8.4",
-    "errorhandler": "~1.0.1",
-    "express": "~4.0.0",
-    "express-session": "~1.0.4",
-    "method-override": "~1.0.0",
+    "connect-flash": "0.x",
+    "cookie-parser": "1.x",
+    "ejs": "0.x",
+    "errorhandler": "1.x",
+    "express": "4.x",
+    "express-session": "1.x",
+    "method-override": "1.x",
     "mocha": "*",
-    "mongoose": "~3.8.1",
-    "morgan": "~1.0.0",
-    "nock": "~0.27.3",
+    "mongoose": "3.x",
+    "morgan": "1.x",
+    "nock": "0.x",
     "node-sass": "*",
-    "serve-favicon": "~2.0.0",
+    "serve-favicon": "2.x",
     "supertest": "*"
   }
 }

@@ -1,9 +1,9 @@
 var Controllers = require(APP.fromRoot("controllers"));
 
 module.exports = exports = setRoutes;
-function setRoutes(App) {
+function setRoutes(app) {
 
   // App routes
-  App.get('/', Controllers.root.index);
+  app.get('/', Controllers.root.index);
 
 }
